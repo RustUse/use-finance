@@ -4,14 +4,17 @@
 //! Thin facade for `RustUse` practical finance primitive crates.
 //!
 //! `use-finance` describes money, currency, amount, ledger, transaction, payment, receipt,
-//! invoice, bank-account, routing-number, reconciliation, and BAI2 vocabulary. It is not a
+//! invoice, bank-account, routing-number, IBAN, BIC, ACH, reconciliation, and BAI2 vocabulary. It is not a
 //! trading system, exchange-rate service, bank integration, payment processor, tax engine,
 //! accounting platform, or market-data provider.
 
+pub use use_ach as ach;
 pub use use_amount as amount;
 pub use use_bai2 as bai2;
 pub use use_bank_account as bank_account;
+pub use use_bic as bic;
 pub use use_currency as currency;
+pub use use_iban as iban;
 pub use use_invoice as invoice;
 pub use use_ledger as ledger;
 pub use use_money as money;
@@ -23,6 +26,10 @@ pub use use_transaction as transaction;
 
 /// Common practical finance primitive types from the focused crates.
 pub mod prelude {
+    pub use crate::ach::{
+        AchAccountType, AchAddendaIndicator, AchCompanyId, AchEntry, AchEntryDirection, AchError,
+        AchIndividualId, AchStandardEntryClass, AchTraceNumber, AchTransactionCode,
+    };
     pub use crate::amount::{Amount, AmountError};
     pub use crate::bai2::{
         AccountIdentifierRecord, Bai2Error, FileHeaderRecord, FileTrailerRecord, FundsTypeCode,
@@ -31,7 +38,9 @@ pub mod prelude {
     pub use crate::bank_account::{
         AccountHolderName, AccountNumber, AccountType, BankAccount, MaskedAccountNumber,
     };
+    pub use crate::bic::{Bic, BicError};
     pub use crate::currency::{AUD, CAD, CurrencyCode, CurrencyCodeError, EUR, GBP, JPY, USD};
+    pub use crate::iban::{Iban, IbanError};
     pub use crate::invoice::{
         BalanceDue, DueDate, Invoice, InvoiceLine, InvoiceNumber, InvoiceStatus, Subtotal, Total,
     };
@@ -56,7 +65,7 @@ pub mod prelude {
 
 #[cfg(test)]
 mod tests {
-    use super::{amount, bai2, currency, money, reconciliation, routing_number};
+    use super::{ach, amount, bai2, bic, currency, iban, money, reconciliation, routing_number};
 
     #[test]
     fn facade_exposes_composable_finance_primitives() -> Result<(), Box<dyn std::error::Error>> {
@@ -66,6 +75,16 @@ mod tests {
 
         let routing = routing_number::RoutingNumber::new("021000021")?;
         assert_eq!(routing.as_str(), "021000021");
+
+        let iban = iban::Iban::new("GB82 WEST 1234 5698 7654 32")?;
+        let bic = bic::Bic::new("DEUTDEFF500")?;
+        let ach_entry = ach::AchEntry::new(
+            ach::AchStandardEntryClass::Ppd,
+            ach::AchTransactionCode::CheckingCredit,
+            ach::AchTraceNumber::new("123456780000001")?,
+            ach::AchCompanyId::new("1234567890")?,
+            ach::AchIndividualId::new("EMPLOYEE001")?,
+        );
 
         let records =
             bai2::parse_logical_records("16,475,12345,Z,bank-ref,customer-ref,invoice payment/\n")?;
@@ -80,6 +99,12 @@ mod tests {
         )?;
 
         assert_eq!(invoice_total.currency().as_str(), "USD");
+        assert_eq!(iban.country_code(), "GB");
+        assert_eq!(bic.country_code(), "DE");
+        assert_eq!(
+            ach_entry.transaction_code().direction(),
+            ach::AchEntryDirection::Credit
+        );
         assert_eq!(normalized.amount().minor_units(), 12_345);
         assert_eq!(candidate.score(), reconciliation::MatchScore::exact());
         Ok(())

@@ -1,10 +1,13 @@
 [workspace]
 members = [
     "crates/use-finance",
+    "crates/use-ach",
     "crates/use-amount",
     "crates/use-bai2",
     "crates/use-bank-account",
+    "crates/use-bic",
     "crates/use-currency",
+    "crates/use-iban",
     "crates/use-invoice",
     "crates/use-ledger",
     "crates/use-money",
@@ -28,11 +31,14 @@ readme = "README.md"
 publish = false
 
 [workspace.dependencies]
+use-ach = { version = "0.1.0", path = "crates/use-ach" }
 use-amount = { version = "0.1.0", path = "crates/use-amount" }
 use-bai2 = { version = "0.1.0", path = "crates/use-bai2" }
 use-bank-account = { version = "0.1.0", path = "crates/use-bank-account" }
+use-bic = { version = "0.1.0", path = "crates/use-bic" }
 use-currency = { version = "0.1.0", path = "crates/use-currency" }
 use-finance = { version = "0.1.0", path = "crates/use-finance" }
+use-iban = { version = "0.1.0", path = "crates/use-iban" }
 use-invoice = { version = "0.1.0", path = "crates/use-invoice" }
 use-ledger = { version = "0.1.0", path = "crates/use-ledger" }
 use-money = { version = "0.1.0", path = "crates/use-money" }
@@ -53,6 +59,9 @@ first-publish-candidates = [
     "use-amount",
     "use-routing-number",
     "use-bank-account",
+    "use-ach",
+    "use-bic",
+    "use-iban",
     "use-money",
     "use-transaction",
     "use-ledger",

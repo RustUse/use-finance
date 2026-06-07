@@ -17,8 +17,12 @@ jobs:
     name: Facade Publish Dry Run
     runs-on: ubuntu-latest
     env:
-      FOCUSED_CRATES: >-
-        use-currency use-amount use-routing-number use-bank-account use-money use-transaction use-ledger use-payment use-receipt use-invoice use-reconciliation use-bai2
+      WAVE_1_CRATES: >-
+        use-currency use-amount use-routing-number use-bank-account use-ach use-bic use-iban
+      WAVE_2_CRATES: >-
+        use-money use-transaction use-reconciliation
+      WAVE_3_CRATES: >-
+        use-ledger use-payment use-receipt use-invoice use-bai2
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -32,7 +36,7 @@ jobs:
 
       - name: Confirm focused crates are visible on crates.io
         run: |
-          for crate in $FOCUSED_CRATES; do
+          for crate in $WAVE_1_CRATES $WAVE_2_CRATES $WAVE_3_CRATES; do
             curl --fail --silent --show-error "https://crates.io/api/v1/crates/${crate}" > /dev/null
           done
 

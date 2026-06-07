@@ -15,10 +15,13 @@ keywords = ["finance", "money", "invoice", "bank", "rustuse"]
 categories = ["data-structures"]
 
 [dependencies]
+use-ach.workspace = true
 use-amount.workspace = true
 use-bai2.workspace = true
 use-bank-account.workspace = true
+use-bic.workspace = true
 use-currency.workspace = true
+use-iban.workspace = true
 use-invoice.workspace = true
 use-ledger.workspace = true
 use-money.workspace = true

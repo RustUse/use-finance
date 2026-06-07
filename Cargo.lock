@@ -3,6 +3,10 @@
 version = 4
 
 [[package]]
+name = "use-ach"
+version = "0.1.0"
+
+[[package]]
 name = "use-amount"
 version = "0.1.0"
 
@@ -19,6 +23,10 @@ name = "use-bank-account"
 version = "0.1.0"
 
 [[package]]
+name = "use-bic"
+version = "0.1.0"
+
+[[package]]
 name = "use-currency"
 version = "0.1.0"
 
@@ -26,10 +34,13 @@ version = "0.1.0"
 name = "use-finance"
 version = "0.1.0"
 dependencies = [
+ "use-ach",
  "use-amount",
  "use-bai2",
  "use-bank-account",
+ "use-bic",
  "use-currency",
+ "use-iban",
  "use-invoice",
  "use-ledger",
  "use-money",
@@ -39,6 +50,10 @@ dependencies = [
  "use-routing-number",
  "use-transaction",
 ]
+
+[[package]]
+name = "use-iban"
+version = "0.1.0"
 
 [[package]]
 name = "use-invoice"

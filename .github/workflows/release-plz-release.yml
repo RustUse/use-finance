@@ -27,7 +27,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             PUBLISHED_CRATES: >-
-                use-currency use-amount use-routing-number use-bank-account use-money use-transaction use-ledger use-payment use-receipt use-invoice use-reconciliation use-bai2 use-finance
+                use-currency use-amount use-routing-number use-bank-account use-ach use-bic use-iban use-money use-transaction use-ledger use-payment use-receipt use-invoice use-reconciliation use-bai2 use-finance
         steps:
             - name: Check out repository
               uses: actions/checkout@v6

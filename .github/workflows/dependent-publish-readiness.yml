@@ -1,0 +1,67 @@
+name: Dependent Publish Readiness
+
+"on":
+    workflow_dispatch:
+        inputs:
+            wave:
+                description: Dependent crate wave to dry-run
+                required: true
+                type: choice
+                options:
+                    - wave-2-base-dependent
+                    - wave-3-composed-dependent
+            registry-ready:
+                description: Confirm prerequisite crate versions are live on crates.io
+                required: true
+                type: boolean
+
+permissions:
+    contents: read
+
+jobs:
+    dependent-release-readiness:
+        if: ${{ inputs.registry-ready }}
+        name: Dependent Publish Dry Run
+        runs-on: ubuntu-latest
+        env:
+            WAVE_1_CRATES: >-
+                use-currency use-amount use-routing-number use-bank-account use-ach use-bic use-iban
+            WAVE_2_CRATES: >-
+                use-money use-transaction use-reconciliation
+            WAVE_3_CRATES: >-
+                use-ledger use-payment use-receipt use-invoice use-bai2
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+
+            - name: Install stable Rust toolchain
+              uses: actions-rust-lang/setup-rust-toolchain@v1
+              with:
+                  rustflags: ""
+                  cache-workspaces: |
+                      . -> target
+
+            - name: Confirm prerequisite crates are visible on crates.io
+              run: |
+                  if [ "${{ inputs.wave }}" = "wave-2-base-dependent" ]; then
+                    prerequisites="$WAVE_1_CRATES"
+                  else
+                    prerequisites="$WAVE_1_CRATES $WAVE_2_CRATES"
+                  fi
+
+                  for crate in $prerequisites; do
+                    curl --fail --silent --show-error "https://crates.io/api/v1/crates/${crate}" > /dev/null
+                  done
+
+            - name: Dry-run selected dependent wave
+              run: |
+                  if [ "${{ inputs.wave }}" = "wave-2-base-dependent" ]; then
+                    crates="$WAVE_2_CRATES"
+                  else
+                    crates="$WAVE_3_CRATES"
+                  fi
+
+                  for crate in $crates; do
+                    cargo package --list -p "$crate"
+                    cargo publish --dry-run --allow-dirty -p "$crate"
+                  done

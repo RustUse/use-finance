@@ -1,4 +1,4 @@
-name: Publish Readiness
+name: Wave 1 Publish Readiness
 
 "on":
   pull_request:
@@ -14,11 +14,11 @@ permissions:
 
 jobs:
   release-readiness:
-    name: Release Readiness Checks
+    name: Wave 1 Release Readiness Checks
     runs-on: ubuntu-latest
     env:
-      FOCUSED_CRATES: >-
-        use-currency use-amount use-routing-number use-bank-account
+      WAVE_1_CRATES: >-
+        use-currency use-amount use-routing-number use-bank-account use-ach use-bic use-iban
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -36,9 +36,9 @@ jobs:
       - name: Test workspace without default features
         run: cargo test --workspace --no-default-features
 
-      - name: Dry-run publish focused crates
+      - name: Dry-run publish Wave 1 independent crates
         run: |
-          for crate in $FOCUSED_CRATES; do
+          for crate in $WAVE_1_CRATES; do
             cargo package --list -p "$crate"
             cargo publish --dry-run --allow-dirty -p "$crate"
           done

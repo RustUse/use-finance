@@ -26,6 +26,21 @@ release = true
 version_group = "rustuse-finance"
 
 [[package]]
+name = "use-ach"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-bic"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-iban"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
 name = "use-money"
 release = true
 version_group = "rustuse-finance"
@@ -76,6 +91,9 @@ changelog_include = [
     "use-amount",
     "use-routing-number",
     "use-bank-account",
+    "use-ach",
+    "use-bic",
+    "use-iban",
     "use-money",
     "use-transaction",
     "use-ledger",

@@ -126,12 +126,12 @@
             "problemMatcher": []
         },
         {
-            "label": "cargo: publish dry-run focused crates",
+            "label": "cargo: publish dry-run wave 1 independent crates",
             "type": "shell",
             "command": "bash",
             "args": [
                 "-lc",
-                "crates=\"use-currency use-amount use-routing-number use-bank-account\"; if [ -z \"$crates\" ]; then echo \"No focused crates configured\"; exit 0; fi; set -euo pipefail; for crate in $crates; do cargo package --list -p \"$crate\"; cargo publish --dry-run --allow-dirty -p \"$crate\"; done"
+                "crates=\"use-currency use-amount use-routing-number use-bank-account use-ach use-bic use-iban\"; if [ -z \"$crates\" ]; then echo \"No focused crates configured\"; exit 0; fi; set -euo pipefail; for crate in $crates; do cargo package --list -p \"$crate\"; cargo publish --dry-run --allow-dirty -p \"$crate\"; done"
             ],
             "windows": {
                 "command": "powershell",
@@ -140,7 +140,47 @@
                     "-ExecutionPolicy",
                     "Bypass",
                     "-Command",
-                    "$ErrorActionPreference = 'Stop'; $crates = @('use-currency','use-amount','use-routing-number','use-bank-account'); foreach ($crate in $crates) { cargo package --list -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; cargo publish --dry-run --allow-dirty -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }"
+                    "$ErrorActionPreference = 'Stop'; $crates = @('use-currency','use-amount','use-routing-number','use-bank-account','use-ach','use-bic','use-iban'); foreach ($crate in $crates) { cargo package --list -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; cargo publish --dry-run --allow-dirty -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }"
+                ]
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cargo: publish dry-run wave 2 base dependent crates",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "crates=\"use-money use-transaction use-reconciliation\"; if [ -z \"$crates\" ]; then echo \"No base dependent crates configured\"; exit 0; fi; set -euo pipefail; for crate in $crates; do cargo package --list -p \"$crate\"; cargo publish --dry-run --allow-dirty -p \"$crate\"; done"
+            ],
+            "windows": {
+                "command": "powershell",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command",
+                    "$ErrorActionPreference = 'Stop'; $crates = @('use-money','use-transaction','use-reconciliation'); foreach ($crate in $crates) { cargo package --list -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; cargo publish --dry-run --allow-dirty -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }"
+                ]
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cargo: publish dry-run wave 3 composed dependent crates",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "crates=\"use-ledger use-payment use-receipt use-invoice use-bai2\"; if [ -z \"$crates\" ]; then echo \"No composed dependent crates configured\"; exit 0; fi; set -euo pipefail; for crate in $crates; do cargo package --list -p \"$crate\"; cargo publish --dry-run --allow-dirty -p \"$crate\"; done"
+            ],
+            "windows": {
+                "command": "powershell",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command",
+                    "$ErrorActionPreference = 'Stop'; $crates = @('use-ledger','use-payment','use-receipt','use-invoice','use-bai2'); foreach ($crate in $crates) { cargo package --list -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; cargo publish --dry-run --allow-dirty -p $crate; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }"
                 ]
             },
             "problemMatcher": []
@@ -176,7 +216,7 @@
                 "cargo: verify workspace",
                 "cargo: examples",
                 "cargo: test no-default-features",
-                "cargo: publish dry-run focused crates"
+                "cargo: publish dry-run wave 1 independent crates"
             ]
         }
     ]
