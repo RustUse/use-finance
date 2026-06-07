@@ -1,0 +1,24 @@
+[package]
+name = "use-transaction"
+description = "Generic financial transaction primitives for RustUse finance crates"
+publish = true
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+documentation = "https://docs.rs/use-transaction"
+keywords = ["transaction", "finance", "status", "date", "rustuse"]
+categories = ["data-structures"]
+
+[dependencies]
+use-amount.workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

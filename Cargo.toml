@@ -1,0 +1,76 @@
+[workspace]
+members = [
+    "crates/use-finance",
+    "crates/use-amount",
+    "crates/use-bai2",
+    "crates/use-bank-account",
+    "crates/use-currency",
+    "crates/use-invoice",
+    "crates/use-ledger",
+    "crates/use-money",
+    "crates/use-payment",
+    "crates/use-receipt",
+    "crates/use-reconciliation",
+    "crates/use-routing-number",
+    "crates/use-transaction",
+]
+resolver = "3"
+
+[workspace.package]
+authors = ["RustUse Contributors"]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/RustUse/use-finance"
+homepage = "https://rustuse.org"
+readme = "README.md"
+publish = false
+
+[workspace.dependencies]
+use-amount = { version = "0.1.0", path = "crates/use-amount" }
+use-bai2 = { version = "0.1.0", path = "crates/use-bai2" }
+use-bank-account = { version = "0.1.0", path = "crates/use-bank-account" }
+use-currency = { version = "0.1.0", path = "crates/use-currency" }
+use-finance = { version = "0.1.0", path = "crates/use-finance" }
+use-invoice = { version = "0.1.0", path = "crates/use-invoice" }
+use-ledger = { version = "0.1.0", path = "crates/use-ledger" }
+use-money = { version = "0.1.0", path = "crates/use-money" }
+use-payment = { version = "0.1.0", path = "crates/use-payment" }
+use-receipt = { version = "0.1.0", path = "crates/use-receipt" }
+use-reconciliation = { version = "0.1.0", path = "crates/use-reconciliation" }
+use-routing-number = { version = "0.1.0", path = "crates/use-routing-number" }
+use-transaction = { version = "0.1.0", path = "crates/use-transaction" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.metadata.rustuse.release]
+publish = false
+versioning = "lockstep-0.x"
+first-publish-candidates = [
+    "use-currency",
+    "use-amount",
+    "use-routing-number",
+    "use-bank-account",
+    "use-money",
+    "use-transaction",
+    "use-ledger",
+    "use-payment",
+    "use-receipt",
+    "use-invoice",
+    "use-reconciliation",
+    "use-bai2",
+    "use-finance",
+]
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+expect_used = "warn"
+multiple_crate_versions = "allow"
+nursery = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "warn"

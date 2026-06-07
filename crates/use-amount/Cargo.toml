@@ -1,0 +1,21 @@
+[package]
+name = "use-amount"
+description = "Decimal-safe scaled integer amount primitives for RustUse finance crates"
+publish = true
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+documentation = "https://docs.rs/use-amount"
+keywords = ["amount", "decimal", "money", "finance", "rustuse"]
+categories = ["data-structures", "no-std"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

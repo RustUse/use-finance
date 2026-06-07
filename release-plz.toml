@@ -1,0 +1,105 @@
+[workspace]
+release = false
+release_always = false
+changelog_update = false
+pr_labels = ["release"]
+max_analyze_commits = 2000
+
+[[package]]
+name = "use-currency"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-amount"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-routing-number"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-bank-account"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-money"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-transaction"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-ledger"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-payment"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-receipt"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-invoice"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-reconciliation"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-bai2"
+release = true
+version_group = "rustuse-finance"
+
+[[package]]
+name = "use-finance"
+release = true
+version_group = "rustuse-finance"
+changelog_update = true
+changelog_path = "./CHANGELOG.md"
+changelog_include = [
+    "use-currency",
+    "use-amount",
+    "use-routing-number",
+    "use-bank-account",
+    "use-money",
+    "use-transaction",
+    "use-ledger",
+    "use-payment",
+    "use-receipt",
+    "use-invoice",
+    "use-reconciliation",
+    "use-bai2",
+]
+
+[changelog]
+header = """# Changelog
+
+## Unreleased
+"""
+protect_breaking_commits = true
+sort_commits = "oldest"
+commit_parsers = [
+    { message = "^feat(?:\\([^)]+\\))?!?: .+", group = "Added" },
+    { message = "^fix(?:\\([^)]+\\))?!?: .+", group = "Fixed" },
+    { message = "^security(?:\\([^)]+\\))?!?: .+", group = "Security" },
+    { message = "^(?:refactor|perf|change)(?:\\([^)]+\\))?!?: .+", group = "Changed" },
+    { message = "^docs(?:\\([^)]+\\))?!?: .+", group = "Documentation" },
+    { message = "^(?:build|ci|chore|deps|test)(?:\\([^)]+\\))?!?: .+", group = "Tooling" },
+    { footer = "^changelog: ?ignore$", skip = true },
+    { message = "^.*", group = "Changed" },
+]

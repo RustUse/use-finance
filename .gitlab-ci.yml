@@ -1,0 +1,10 @@
+stages:
+  - verify
+
+verify:
+  stage: verify
+  image: rust:1.95
+  script:
+    - cargo fmt --all -- --check
+    - cargo clippy --workspace --all-targets --all-features -- -D warnings
+    - cargo test --workspace --all-features

@@ -1,0 +1,21 @@
+[package]
+name = "use-bank-account"
+description = "Conservative bank account primitives for RustUse finance crates"
+publish = true
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+documentation = "https://docs.rs/use-bank-account"
+keywords = ["bank", "account", "finance", "mask", "rustuse"]
+categories = ["data-structures"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

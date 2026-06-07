@@ -1,0 +1,35 @@
+[package]
+name = "use-finance"
+description = "Facade crate for RustUse practical finance primitives"
+publish = true
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+documentation = "https://docs.rs/use-finance"
+keywords = ["finance", "money", "invoice", "bank", "rustuse"]
+categories = ["data-structures"]
+
+[dependencies]
+use-amount.workspace = true
+use-bai2.workspace = true
+use-bank-account.workspace = true
+use-currency.workspace = true
+use-invoice.workspace = true
+use-ledger.workspace = true
+use-money.workspace = true
+use-payment.workspace = true
+use-receipt.workspace = true
+use-reconciliation.workspace = true
+use-routing-number.workspace = true
+use-transaction.workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true
