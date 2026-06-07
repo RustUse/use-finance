@@ -37,7 +37,7 @@ use-bai2 = { version = "0.1.0", path = "crates/use-bai2" }
 use-bank-account = { version = "0.1.0", path = "crates/use-bank-account" }
 use-bic = { version = "0.1.0", path = "crates/use-bic" }
 use-currency = { version = "0.1.0", path = "crates/use-currency" }
-use-finance = { version = "0.1.0", path = "crates/use-finance" }
+use-finance = { version = "0.1.1", path = "crates/use-finance" }
 use-iban = { version = "0.1.0", path = "crates/use-iban" }
 use-invoice = { version = "0.1.0", path = "crates/use-invoice" }
 use-ledger = { version = "0.1.0", path = "crates/use-ledger" }
